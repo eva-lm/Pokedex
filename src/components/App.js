@@ -5,19 +5,37 @@ import Card from "./Card";
 import "../stylesheets/App.css";
 
 class App extends React.Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
 
     this.state = {
       pokemon: []
     };
   }
-
   componentDidMount() {
+    this.getPokemonInfo();
+  }
+
+  getPokemonInfo() {
     getDataFromServer().then(data => {
-      this.setState({
-        pokemon: data.results
-      });
+      for (let pokeData of data.results) {
+        fetch(pokeData.url)
+          .then(response => response.json())
+          .then(pokemones => {
+            const typesArray = [];
+            for (let pokeType of pokemones.types) {
+              typesArray.push(pokeType.type.name);
+            }
+            const pokeInfo = {
+              name: pokeData.name,
+              image: pokemones.sprites.front_default,
+              type: typesArray
+            };
+            this.setState({
+              pokemon: [...this.state.pokemon, pokeInfo]
+            });
+          });
+      }
     });
   }
 
