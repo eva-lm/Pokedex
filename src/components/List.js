@@ -1,13 +1,18 @@
 import React from "react";
+import Card from "./Card";
 
 const List = props => {
   const { pokemon } = props;
-  console.log("soy las props", props);
   return (
-    <div>
-      holiiiiii
-      <p></p>
-    </div>
+    <ul className="pokemon__list">
+      {pokemon.map((pokemon, index) => {
+        return (
+          <li key={index} className="pokemon__item">
+            <Card pokemon={pokemon} />
+          </li>
+        );
+      })}
+    </ul>
   );
 };
 export default List;
