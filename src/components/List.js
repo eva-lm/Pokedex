@@ -2,16 +2,20 @@ import React from "react";
 import Card from "./Card";
 
 const List = props => {
-  const { pokemon } = props;
+  const { pokemon, search } = props;
   return (
     <ul className="pokemon__list">
-      {pokemon.map((pokemon, index) => {
-        return (
-          <li key={index} className="pokemon__item">
-            <Card pokemon={pokemon} />
-          </li>
-        );
-      })}
+      {pokemon
+        .filter(pokemonFilter =>
+          pokemonFilter.name.toUpperCase().includes(search.toUpperCase())
+        )
+        .map((pokemon, index) => {
+          return (
+            <li key={index} className="pokemon__item">
+              <Card pokemon={pokemon} />
+            </li>
+          );
+        })}
     </ul>
   );
 };

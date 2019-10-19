@@ -1,7 +1,7 @@
 import React from "react";
 import getDataFromServer from "../services/data";
 import List from "./List";
-import Card from "./Card";
+import Filters from "./Filters";
 import "../stylesheets/App.css";
 
 class App extends React.Component {
@@ -9,8 +9,10 @@ class App extends React.Component {
     super(props);
 
     this.state = {
-      pokemon: []
+      pokemon: [],
+      search: ""
     };
+    this.handleSearchPokemon = this.handleSearchPokemon.bind(this);
   }
   componentDidMount() {
     this.getPokemonInfo();
@@ -39,11 +41,23 @@ class App extends React.Component {
     });
   }
 
+  handleSearchPokemon(ev) {
+    const search = ev.currentTarget.value;
+    this.setState({
+      search: search
+    });
+  }
+
   render() {
-    const { pokemon } = this.state;
+    const { pokemon, search } = this.state;
     return (
       <div className="App">
-        <List pokemon={pokemon} />
+        <Filters
+          search={search}
+          pokemon={pokemon}
+          handleSearchPokemon={this.handleSearchPokemon}
+        />
+        <List pokemon={pokemon} search={search} />
       </div>
     );
   }
