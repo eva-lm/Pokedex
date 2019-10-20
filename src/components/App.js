@@ -2,7 +2,7 @@ import React from "react";
 import getDataFromServer from "../services/data";
 import List from "./List";
 import Filters from "./Filters";
-import "../stylesheets/App.css";
+import "../stylesheets/App.scss";
 
 class App extends React.Component {
   constructor(props) {
@@ -30,6 +30,7 @@ class App extends React.Component {
             }
             const pokeInfo = {
               name: pokeData.name,
+              id: pokemones.id,
               image: pokemones.sprites.front_default,
               type: typesArray
             };

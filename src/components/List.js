@@ -1,5 +1,6 @@
 import React from "react";
 import Card from "./Card";
+import "../stylesheets/List.scss";
 
 const List = props => {
   const { pokemon, search } = props;
