@@ -1,6 +1,7 @@
 import React from "react";
 import Card from "./Card";
-import "../stylesheets/List.scss";
+import PropTypes from "prop-types";
+import "../stylesheets/layout/List.scss";
 
 const List = props => {
   const { pokemon, search } = props;
@@ -20,4 +21,10 @@ const List = props => {
     </ul>
   );
 };
+
+List.propTypes = {
+  pokemon: PropTypes.arrayOf(PropTypes.object).isRequired,
+  search: PropTypes.string
+};
+
 export default List;

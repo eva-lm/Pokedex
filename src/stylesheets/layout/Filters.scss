@@ -1,3 +1,5 @@
+@import "../components/variables";
+
 .filter__container {
   display: flex;
   justify-content: center;
@@ -5,12 +7,13 @@
 }
 
 .filter__name {
-  background-color: rgb(237, 153, 153);
-  border: solid 3px red;
+  background-color: $colorLight;
+  border: solid 4px $colorPink;
   width: 300px;
   height: 30px;
-  color: red;
+  color: $colorDarkCyan;
   font-family: Arial, Helvetica, sans-serif;
-  color: red;
   font-size: 20px;
+  padding: 3px 15px;
+  border-radius: 3px;
 }

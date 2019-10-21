@@ -1,5 +1,6 @@
 import React from "react";
-import "../stylesheets/Filters.scss";
+import PropTypes from "prop-types";
+import "../stylesheets/layout/Filters.scss";
 
 const Filters = props => {
   return (
@@ -14,6 +15,11 @@ const Filters = props => {
       />
     </label>
   );
+};
+
+Filters.propTypes = {
+  handleSearchPokemon: PropTypes.func.isRequired,
+  search: PropTypes.string
 };
 
 export default Filters;

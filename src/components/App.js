@@ -2,7 +2,6 @@ import React from "react";
 import getDataFromServer from "../services/data";
 import List from "./List";
 import Filters from "./Filters";
-import "../stylesheets/App.scss";
 
 class App extends React.Component {
   constructor(props) {

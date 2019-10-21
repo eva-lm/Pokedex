@@ -1,5 +1,6 @@
 import React from "react";
-import "../stylesheets/Card.scss";
+import PropTypes from "prop-types";
+import "../stylesheets/layout/Card.scss";
 
 const Card = props => {
   const { pokemon } = props;
@@ -24,6 +25,11 @@ const Card = props => {
       </ul>
     </div>
   );
+};
+
+Card.propTypes = {
+  pokemon: PropTypes.arrayOf(PropTypes.object).isRequired,
+  type: PropTypes.string
 };
 
 export default Card;

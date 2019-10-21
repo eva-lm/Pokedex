@@ -1,0 +1,23 @@
+@import "../components/variables";
+
+.pokemon__list {
+  display: flex;
+  flex-wrap: wrap;
+}
+.pokemon__item {
+  background-color: $colorLight;
+  border: solid 4px $colorPink;
+  border-radius: 5px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 150px;
+  margin: 10px;
+  cursor: pointer;
+  &:hover {
+    border: solid 5px rgb(20, 227, 148);
+    box-shadow: 10px 5px 8px 3px rgba(232, 91, 15, 0.425);
+    opacity: 1;
+  }
+}

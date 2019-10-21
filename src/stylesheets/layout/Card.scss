@@ -1,23 +1,25 @@
+@import "../components/variables";
+
 .pokemon__name {
   text-transform: uppercase;
   font-size: 16px;
   text-align: center;
   font-family: Arial, Helvetica, sans-serif;
-  color: red;
+  color: $colorDarkCyan;
 }
 .pokemon__types {
   list-style: none;
   padding: 2px 10px;
   border-radius: 2px;
-  background-color: red;
-  color: white;
+  background-color: $colorDarkCyan;
+  color: $colorLight;
   font-size: 12px;
   text-transform: uppercase;
   margin: 5px;
 }
 .pokemon__id {
   font-family: Arial, Helvetica, sans-serif;
-  color: red;
-  font-size: 14px;
+  color: $colorDarkCyan;
+  font-size: 15px;
   text-align: center;
 }
