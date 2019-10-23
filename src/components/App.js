@@ -23,19 +23,19 @@ class App extends React.Component {
         fetch(pokeData.url)
           .then(response => response.json())
           .then(pokemones => {
-            const typesArray = [];
-            for (let pokeType of pokemones.types) {
-              typesArray.push(pokeType.type.name);
-            }
+            const newTypes = pokemones.types.map(item => {
+              return item.type.name;
+            });
             const pokeInfo = {
               name: pokeData.name,
               id: pokemones.id,
               image: pokemones.sprites.front_default,
-              type: typesArray
+              type: newTypes
             };
             this.setState({
               pokemon: [...this.state.pokemon, pokeInfo]
             });
+            console.log(this.state);
           });
       }
     });
@@ -49,15 +49,18 @@ class App extends React.Component {
   }
 
   render() {
-    const { pokemon, search } = this.state;
+    const { search } = this.state;
+
+    const pokemon = this.state.pokemon.filter(pokemonFilter =>
+      pokemonFilter.name.toUpperCase().includes(search.toUpperCase())
+    );
     return (
       <div className="App">
         <Filters
           search={search}
-          pokemon={pokemon}
           handleSearchPokemon={this.handleSearchPokemon}
         />
-        <List pokemon={pokemon} search={search} />
+        <List pokemon={pokemon} />
       </div>
     );
   }
