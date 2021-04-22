@@ -1,0 +1,29 @@
+@import "../components/variables";
+
+.app {
+  background: linear-gradient(
+    0deg,
+    rgba(241, 81, 116, 1) 0%,
+    rgba(21, 163, 189, 1) 73%
+  );
+  &__show-more-content {
+    display: flex;
+    justify-content: center;
+    margin-top: 50px;
+  }
+  &__show-more-btn {
+    width: 100%;
+    background-color: $colorPink;
+    color: $colorLight;
+    border: none;
+    font-size: 16px;
+    font-weight: bold;
+    padding: 20px 40px;
+    border-radius: 12px;
+    box-shadow: 5px 8px 15px 3px rgba(26, 26, 26, 0.212);
+    cursor: pointer;
+  }
+  &__show-more-btn:hover {
+    background-color: $colorDarkCyan;
+  }
+}

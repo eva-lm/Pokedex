@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import "../stylesheets/layout/Filters.scss";
 
 const Filters = props => {
+
   return (
     <label htmlFor="pokemon" className="filter__container">
       <input

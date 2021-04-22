@@ -4,6 +4,10 @@ import "../stylesheets/layout/Card.scss";
 
 const Card = props => {
   const { pokemon } = props;
+//  console.log("typeColor", props.typeColors)
+
+//   console.log("type", pokemon.type)
+
   return (
     <div className="pokemon__card">
       <h1 className="pokemon__name">{pokemon.name}</h1>
@@ -17,8 +21,8 @@ const Card = props => {
       <ul className="pokemon__types">
         {pokemon.type.map((type, index) => {
           return (
-            <li className="pokemon__info-type" key={index}>
-              {type}
+            <li style={{ backgroundColor : props.typeColors[type] }} key={index}>
+            {type}
             </li>
           );
         })}

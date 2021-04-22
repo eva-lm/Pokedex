@@ -1,0 +1,52 @@
+@import "../components/variables";
+
+.poke {
+  background-color: $colorDarkCyan;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  &__back {
+    padding: 30px 0 10px 50px;
+    width: 100%;
+    &-link {
+      color: $colorLight;
+      background-color: $colorPink;
+      border-radius: 12px;
+      font-size: 18px;
+      font-weight: bold;
+      padding: 10px 20px;
+      text-decoration: none;
+    }
+  }
+  &__logo {
+    height: 200px;
+  }
+  &__card {
+    border: solid 1px black;
+    background-color: white;
+  }
+  &__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px;
+    &-title {
+      color: violet;
+    }
+    &-id {
+      color: aqua;
+    }
+  }
+  &__types {
+    display: flex;
+    &-item {
+      list-style: none;
+    }
+  }
+  &__img-content {
+    background-color: yellow;
+  }
+  &__imgs-view {
+    display: flex;
+  }
+}
