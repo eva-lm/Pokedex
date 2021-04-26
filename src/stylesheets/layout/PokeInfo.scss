@@ -2,12 +2,15 @@
 
 .poke {
   background-color: $colorDarkCyan;
+  height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
   &__back {
-    padding: 30px 0 10px 50px;
     width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     &-link {
       color: $colorLight;
       background-color: $colorPink;
@@ -16,25 +19,29 @@
       font-weight: bold;
       padding: 10px 20px;
       text-decoration: none;
+      left: 0;
+      margin-left: 30px;
+      position: absolute;
     }
   }
   &__logo {
-    height: 200px;
+    height: 150px;
   }
+  //   &__wrap {
+  //     display: flex;
+  //     width: 70%;
+  //   }
   &__card {
-    border: solid 1px black;
-    background-color: white;
+    box-shadow: 5px 5px 5px 5px rgba(0, 0, 0, 0.192);
+    padding: 0 50px 50px 30px;
+    width: 450px;
   }
   &__header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 0 20px;
     &-title {
-      color: violet;
-    }
-    &-id {
-      color: aqua;
+      color: $colorLight;
     }
   }
   &__types {
@@ -43,10 +50,76 @@
       list-style: none;
     }
   }
-  &__img-content {
-    background-color: yellow;
-  }
-  &__imgs-view {
+  &__main {
     display: flex;
+    flex-direction: column;
+    align-items: center;
+    border: solid 1px $colorLight;
+    padding: 10px;
+    width: 100%;
+    &-img {
+      height: 30vh;
+    }
+    &-info {
+      display: flex;
+      justify-content: space-between;
+      width: 100%;
+      p {
+        font-size: 11px;
+        margin: 5px 0 0 0;
+      }
+    }
   }
+  &__abilities {
+    padding: 0;
+    &-title {
+      font-size: 12px;
+    }
+    &-item {
+      list-style: none;
+    }
+    &-btn {
+      border: none;
+      background-color: $colorPink;
+      padding: 5px 10px;
+      border-radius: 12px;
+      cursor: pointer;
+      margin: 5px 0;
+      text-transform: uppercase;
+      color: $colorLight;
+    }
+  }
+  &__preview {
+    display: flex;
+    width: 100%;
+    &-img {
+      background-color: $colorLight;
+      width: 60px;
+      z-index: 1;
+      border: solid 2px $colorPink;
+      display: flex;
+      align-items: flex-end;
+      justify-content: flex-end;
+      margin: 0 5px;
+    }
+    &-id {
+      font-size: 12px;
+      margin: 0 5px 0 0;
+      font-weight: bold;
+      align-self: flex-end;
+    }
+  }
+}
+
+.none {
+  display: none;
+}
+.red {
+  background-color: red;
+}
+.blue {
+  background-color: blue;
+}
+.pink {
+  background-color: pink;
 }

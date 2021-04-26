@@ -1,5 +1,7 @@
 @import "../components/variables";
-
+* {
+  box-sizing: border-box;
+}
 .app {
   background: linear-gradient(
     0deg,

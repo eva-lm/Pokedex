@@ -1,5 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
+import {typeColors} from "./Assets";
 import "../stylesheets/layout/Card.scss";
 
 const Card = props => {
@@ -21,7 +22,7 @@ const Card = props => {
       <ul className="pokemon__types">
         {pokemon.type.map((type, index) => {
           return (
-            <li style={{ backgroundColor : props.typeColors[type] }} key={index}>
+            <li style={{ backgroundColor : typeColors[type] }} key={index}>
             {type}
             </li>
           );
