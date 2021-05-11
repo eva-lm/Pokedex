@@ -1,7 +1,8 @@
 Pokedex
-App para consultar los distintos tipos de pokemon.
 
-Características: 
+Listado con todos los pokemones de todas las generaciones donde puedes acceder a cada uno de ellos para conocer sus características.:blush:
 
-- Deben aparecer los 25 primeros pokemon (para tener la info detallada de cada uno, tendremos que hacer una petición al servidor y recordad que hay un límite)
-- Los pokemon deben poder filtrarse por nombre
+
+Todos los entrenadores Pokémon consultan su pokedex para registrar automáticamente las fichas de todas las diversas especies Pokémon. Aprende todo acerca de ellos y...
+
+Hazte con todos! :exclamation: :star:
