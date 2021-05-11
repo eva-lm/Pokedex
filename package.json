@@ -1,7 +1,7 @@
 {
   "name": "pokemon",
   "version": "0.1.0",
-  "homepage": ".",
+  "homepage": "https://eva-lm.github.io/Pokedex",
   "private": true,
   "dependencies": {
     "node-sass": "^4.14.1",
@@ -12,6 +12,8 @@
     "react-scripts": "3.2.0"
   },
   "scripts": {
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build",
     "build": "react-scripts build && rm -rf docs && mv build docs",
     "start": "react-scripts start",
     "test": "react-scripts test",

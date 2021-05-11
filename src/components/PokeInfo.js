@@ -8,12 +8,15 @@ import { fetchService, urlPokeInfo } from "../services/fetchService";
 
 const PokeInfo = () => {
     const [pokeInfo, setPokeInfo] = useState();
-    const [pokeAbilitie, setPokeAbilitie] = useState();
+    const [pokeAbilitie, setPokeAbilitie] = useState([]);
     const [abilitieFilterEs, setAbilitieFilterEs] = useState();
-    const [showAbilitieText, setShowAbilitieText] = useState("red");
+    const [abilitieNameEs, setAbilitieNameEs] = useState();
+    const [active, setActive] = useState("")
     let { id } = useParams();
     let getAbilities;
     let getTypes;
+    let mapAbilities;
+    let abilitieUrl;
 
     useEffect(() => {
         const fetchData = () => {
@@ -24,61 +27,92 @@ const PokeInfo = () => {
         fetchData();
     }, []);
 
-    //Llamamos al filterAbilitie cuando nos aseguramos que el state pokeAbilitie ha seteado un valor
+    // //Llamamos al filterAbilitie cuando nos aseguramos que el state pokeAbilitie ha seteado un valor
+    
+    useEffect(() => {
+        fetchInfoAbilitie(abilitieUrl)
+    }, [pokeInfo])
+    
     useEffect(() => {
         filterAbilitie()
-    }, [pokeAbilitie])
+    }, [pokeAbilitie], fetchInfoAbilitie)
 
     const getMorePokeInfo = function () {
         //Abilities
-        const mapAbilities = pokeInfo.abilities.map(i => i.ability);
+        mapAbilities = pokeInfo.abilities.map(i => i.ability);
         getAbilities = mapAbilities.map(i => i.name);
+        abilitieUrl = mapAbilities.map(i => i.url);
         //Types
         const mapTypes = pokeInfo.types.map(i => i.type);
         getTypes = mapTypes.map(i => i.name);
-
-        //Stats
-        // let jeje
-
-        // for (let i of pokeInfo.stats) {
-        //     jeje = {
-        //         base: i.base_stat,
-        //         effort: i.effort,
-        //         //name: toli.name
-        //     };
-
-        // }
     }
 
     if (pokeInfo !== undefined) {
         getMorePokeInfo()
     }
 
-    const showAbilitie = (e) => {
-        const value = e.currentTarget.value;
-        const abilities = pokeInfo.abilities.map(i => i.ability)
-        const filter = abilities.filter(i => i.name === value)
-        const abilitieUrl = filter.map(i => i.url);
-        fetchInfoAbilitie(abilitieUrl)
-        setShowAbilitieText(`${value}`);
-
-    }
-
-    const fetchInfoAbilitie = (abilitieUrl) => {
-        fetchService(abilitieUrl)
-            .then(data =>
-                setPokeAbilitie(data))
-    }
+    var fetchInfoAbilitie = async(abilitieUrl) => {
+        if (typeof abilitieUrl != "undefined") {
+            for (let dataUrl of abilitieUrl) {
+                await fetchService(dataUrl)
+                .then(abilityData => {
+                  setTimeout(setPokeAbilitie(prevAbility => {
+                        return [
+                            ... prevAbility,
+                            abilityData
+                        ]
+                    }), 1000)
+                })
+            }
+        } 
+        //filterAbilitie()
+    };
 
     const filterAbilitie = () => {
-        if (typeof pokeAbilitie != "undefined") {
-            const filterAbilitiesText = pokeAbilitie.flavor_text_entries.filter(i => i.language.name === "es")
-            const getAbilitiesTextEs = filterAbilitiesText.map(i => i.flavor_text)
-            const saveAbilitiesEs = getAbilitiesTextEs[getAbilitiesTextEs.length - 1]
-            setAbilitieFilterEs(saveAbilitiesEs)
+        //console.log("pokeAbilite filter in funciontx", pokeAbilitie)
+        if (pokeAbilitie.length) {
+         //  await mimimi()
+        const filterAbilitiesText = pokeAbilitie[0].flavor_text_entries.filter(i => i.language.name === "es")
+        const firstAbilitieText = filterAbilitiesText[filterAbilitiesText.length -1].flavor_text;
+        setAbilitieFilterEs(firstAbilitieText);
+        setActive(pokeAbilitie[0].name)
+           // const filterAbilitiesText = pokeAbilitie.map(i => i.flavor_text_entries.filter(i => i.language.name === "es"))
+            // const getAbilitiesTextEs = filterAbilitiesText.map(i => i.map(i => i.flavor_text))
+           // console.log("getAbilitiesTextEs", getAbilitiesTextEs)
+
+          //  const saveAbilitiesEs = getAbilitiesTextEs.map( i => i[i.length - 1])
+           // console.log("saveAbilitiesEs", saveAbilitiesEs)
+
+    //         setAbilitieFilterEs([saveAbilitiesEs])
+        console.log("getAbilities", pokeAbilitie)
+        const abilitieEs = pokeAbilitie[0].names.filter(i => i.language.name === "es")
+        const saveAbilitieEs = abilitieEs.map(i => i.name);
+        console.log("abilitieEs--->", saveAbilitieEs)
+        setAbilitieNameEs(saveAbilitieEs);
         }
     }
-
+    const mimimi = function() {
+    }
+    const showAbilitie = (e) => {
+        console.log("pokeAbilite filter in value", pokeAbilitie)
+        const value = e.currentTarget.value;
+        const handleFilterAbilitie = pokeAbilitie.filter(i => i.name === value);
+        const handleAbilitie = handleFilterAbilitie.map(i => i.flavor_text_entries.filter(i => i.language.name === "es"));
+        const handleSelectAbilitie = handleAbilitie.map( i => i[i.length -1]);
+        const handleSelectAbilitieText = handleSelectAbilitie.map(i => i.flavor_text);
+        setAbilitieFilterEs(handleSelectAbilitieText);
+        console.log("VALEU", value)
+        console.log("handleFilterAbilitie", handleFilterAbilitie)
+        console.log("handleAbilitie", handleAbilitie)
+        console.log("handleSelectAbilitieText", handleSelectAbilitieText)
+        // abilitieUrl = filter.map(i => i.url);
+        // fetchInfoAbilitie(abilitieUrl)
+        const abilitieEsEvent = handleFilterAbilitie.map(i => i.names.filter(i => i.language.name === "es"))
+        const saveAbilitieEsEvent = abilitieEsEvent.map(i => i.map(i => i.name)).flat();
+        setAbilitieNameEs(saveAbilitieEsEvent);
+        console.log("abilitieEsEVENT--->", saveAbilitieEsEvent)
+        setActive(value)
+    }
     return (
         <div className="poke">
             <div className="poke__back">
@@ -118,16 +152,16 @@ const PokeInfo = () => {
                         : "" } */}
                         <ol className="poke__abilities">
                             {/* <h4 className="poke__title">Abilities:</h4> */}
-                            <p>{abilitieFilterEs}</p>
                             {getAbilities.map((i, index) => {
                                 return (
                                     <li className="poke__abilities-item" key={index}>
-                                        <button className="poke__abilities-btn" onMouseOver={showAbilitie} value={i}>
-                                           {i} 
-                                        </button></li>
+                                        <button className={active === i ? "poke__abilities-btn-active" : "poke__abilities-btn"} onMouseOver={showAbilitie} value={i}>
+                                          {active === i ? abilitieNameEs : i} 
+                                        </button>
+                                        </li>
                                 )
-                            })}
-                            
+                            })} 
+                                    <p className="poke__abilities-text">{abilitieFilterEs}</p>
                         </ol>
                         <div className="poke__preview">
                             {pokeInfo.sprites.front_default !== null ? (

@@ -14,11 +14,11 @@ const List = props => {
     <ul className="pokemon__list">
       {pokemon.map((pokemon, index) => {
         return (
+            <Link className="pokemon__item-link" to={`/pokemon/${pokemon.id}`}>
           <li key={index} className="pokemon__item">
-            <Link to={`/pokemon/${pokemon.id}`}>
             <Card pokemon={pokemon} />
-            </Link>
           </li>
+            </Link>
         );
       })}
     </ul>
