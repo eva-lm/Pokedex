@@ -45,12 +45,38 @@
     align-items: center;
     &-title {
       color: $colorLight;
+      font-size: 22px;
     }
   }
   &__types {
     display: flex;
     &-item {
       list-style: none;
+    }
+  }
+  &__select-lang {
+    background: transparent;
+    border: none;
+    margin: 5px 0 10px 0;
+    display: flex;
+    justify-content: center;
+    font-size: 13px;
+    font-weight: bold;
+    cursor: pointer;
+    //   border: solid 1px white;
+    border-radius: 12px;
+    background-color: rgb(176, 178, 179);
+    padding: 5px;
+    width: 20%;
+    .on {
+      color: white;
+    }
+    .space {
+      margin: 0 5px;
+      color: white;
+    }
+    .off {
+      color: rgb(136, 139, 139);
     }
   }
   &__main {
