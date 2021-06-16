@@ -9,6 +9,7 @@ import { fetchService, urlPokeInfo } from "../services/fetchService";
 const PokeInfo = () => {
     const [pokeInfo, setPokeInfo] = useState();
     const [pokeAbilitie, setPokeAbilitie] = useState([]);
+    const [abilitieName, setAbilitieName] = useState();
     const [abilitieFilterEs, setAbilitieFilterEs] = useState();
     const [changeLang, setChangeLang] = useState(true);
     const [language, setLanguage] = useState("en");
@@ -17,7 +18,6 @@ const PokeInfo = () => {
     let { id } = useParams();
     let getAbilities;
     let getTypes;
-    let mapAbilities;
     let abilitieUrl;
 
     useEffect(() => {
@@ -42,18 +42,18 @@ const PokeInfo = () => {
     //cuando cambia el valor de language se vuelve a ejecutar filterAblite
     useEffect(() => {
         filterAbilitie()
+        translateAbilties()
     },[language])
 
     useEffect(() => {
         showLanguage()
     }, )
 
+
     const getMorePokeInfo = function () {
         //Abilities
-        mapAbilities = pokeInfo.abilities.map(i => i.ability);
+        const mapAbilities = pokeInfo.abilities.map(i => i.ability);
         getAbilities = mapAbilities.map(i => i.name);
-        console.log("pokeInfo", pokeInfo)
-        console.log("mapAbilities", mapAbilities)
         abilitieUrl = mapAbilities.map(i => i.url);
         //Types
         const mapTypes = pokeInfo.types.map(i => i.type);
@@ -86,24 +86,36 @@ const PokeInfo = () => {
             setLanguage("es");
         }
     }
-    console.log("languaje", language)
     const filterAbilitie = () => {
         if (pokeAbilitie.length) {
         const filterAbilitiesText = pokeAbilitie[0].flavor_text_entries.filter(i => i.language.name === language)
         const firstAbilitieText = filterAbilitiesText[filterAbilitiesText.length -1].flavor_text;
         setAbilitieFilterEs(firstAbilitieText);
         setActive(pokeAbilitie[0].name)
+        setAbilitieName(getAbilities);
+        }
+    }
+    const translateAbilties = () => {
+        if (pokeAbilitie.length) {
+        const filterAbilitiesName = pokeAbilitie.map(i => i.names.filter(i => i.language.name === language))
+        const filterAbilitiesNameFlat = filterAbilitiesName.flat()
+        const getAbilitieNameTranslate = filterAbilitiesNameFlat.map(i => i.name)
+        setAbilitieName(getAbilitieNameTranslate)
         }
 
     }
     const showAbilitie = (e) => {
-        const value = e.currentTarget.value;
+        const value = e.currentTarget.value.toLowerCase();
+        console.log("value", value)
         const handleFilterAbilitie = pokeAbilitie.filter(i => i.name === value);
+        console.log("handleFilterAbilitie", handleFilterAbilitie)
         const handleAbilitie = handleFilterAbilitie.map(i => i.flavor_text_entries.filter(i => i.language.name === language));
         const handleSelectAbilitie = handleAbilitie.map( i => i[i.length -1]);
         const handleSelectAbilitieText = handleSelectAbilitie.map(i => i.flavor_text);
         setAbilitieFilterEs(handleSelectAbilitieText);
         setActive(value)
+
+        console.log("text", abilitieFilterEs)
     } 
 
 
@@ -151,7 +163,8 @@ const PokeInfo = () => {
                         : "" } */}
                         <ol className="poke__abilities">
                             {/* <h4 className="poke__title">Abilities:</h4> */}
-                            {getAbilities.map((i, index) => {
+                            {abilitieName != undefined ? (
+                            abilitieName.map((i, index) => {
                                 return (
                                     <li className="poke__abilities-item" key={index}>
                                         <button className={active === i ? "poke__abilities-btn-active" : "poke__abilities-btn"} onMouseOver={showAbilitie} value={i}>
@@ -160,8 +173,10 @@ const PokeInfo = () => {
                                         </button>
                                         </li>
                                 )
-                            })} 
-                                    <p className="poke__abilities-text">{abilitieFilterEs}</p>
+                            })
+                            ) : ("")}
+
+                                <p className="poke__abilities-text">{abilitieFilterEs}</p>
                         </ol>
                         <div className="poke__preview">
                             {pokeInfo.sprites.front_default !== null ? (

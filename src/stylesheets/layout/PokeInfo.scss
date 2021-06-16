@@ -60,23 +60,24 @@
     margin: 5px 0 10px 0;
     display: flex;
     justify-content: center;
-    font-size: 13px;
+    font-size: 15px;
     font-weight: bold;
     cursor: pointer;
-    //   border: solid 1px white;
+    border: solid 1px $colorPink;
     border-radius: 12px;
-    background-color: rgb(176, 178, 179);
+    background-color: white;
     padding: 5px;
     width: 20%;
     .on {
-      color: white;
+      //color: $colorDarkCyan;
+      color: #0f798b;
     }
     .space {
       margin: 0 5px;
-      color: white;
+      color: $colorDarkCyan;
     }
     .off {
-      color: rgb(136, 139, 139);
+      color: rgb(163, 173, 177);
     }
   }
   &__main {
